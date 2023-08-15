@@ -17,6 +17,7 @@ function handleButtonClick(page: number) {
   <div class="flex items-stretch justify-center pb-18 sm:(justify-start pb-6)">
     <app-button
       :disabled="currentPage === 1"
+      aria-label="previous"
       variant="outlined"
       color="gray-300"
       size="small"
@@ -44,6 +45,7 @@ function handleButtonClick(page: number) {
 
     <app-button
       :disabled="currentPage === totalPages"
+      aria-label="next"
       variant="outlined"
       color="gray-300"
       size="small"

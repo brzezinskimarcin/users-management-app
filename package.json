@@ -10,8 +10,7 @@
     "typecheck": "vue-tsc --noEmit",
     "test": "vitest",
     "build": "vite build",
-    "preview": "vite preview",
-    "lint:ci": "eslint . --ext .vue,.ts, --ignore-path .gitignore"
+    "preview": "vite preview"
   },
   "dependencies": {
     "pinia": "^2.1.4",
@@ -22,6 +21,8 @@
   "devDependencies": {
     "@brzezinskimarcin/eslint-config": "^0.3.1",
     "@iconify-json/material-symbols": "^1.1.55",
+    "@testing-library/dom": "^9.3.1",
+    "@testing-library/jest-dom": "^6.0.0",
     "@types/jsdom": "^21.1.1",
     "@types/node": "^18.17.0",
     "@unocss/reset": "^0.55.0",
