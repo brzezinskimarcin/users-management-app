@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { required, useValidation } from '@/composables/validation';
 import type { UserFormData } from '@/types/api';
 import defaultAvatar from '@/assets/avatar-placeholder.png';
 
@@ -21,6 +22,24 @@ const showChangePhotoDialog = ref(false);
 const formData = ref(props.initialData);
 const newAvatarUrl = ref(props.initialData.avatar);
 
+const { error: errorFirstName, validate: validateFirstName } = useValidation({
+  ref: () => formData.value.first_name,
+  rule: required,
+});
+const { error: errorLastName, validate: validateLastName } = useValidation({
+  ref: () => formData.value.last_name,
+  rule: required,
+});
+
+function handleSubmitClick() {
+  validateFirstName();
+  validateLastName();
+
+  if (!errorFirstName.value && !errorLastName.value) {
+    emit('submit', formData.value);
+  }
+}
+
 watch(showChangePhotoDialog, (showDialog) => {
   if (!showDialog) {
     formData.value.avatar = newAvatarUrl.value;
@@ -35,12 +54,14 @@ watch(showChangePhotoDialog, (showDialog) => {
         <app-input
           v-model="formData.first_name"
           :label="t('first-name')"
+          :error="errorFirstName"
           variant="outlined"
           class="w-full"
         />
         <app-input
           v-model="formData.last_name"
           :label="t('last-name')"
+          :error="errorLastName"
           variant="outlined"
           class="w-full"
         />
@@ -51,7 +72,7 @@ watch(showChangePhotoDialog, (showDialog) => {
           color="primary"
           size="medium"
           rounded="small"
-          @click="emit('submit', formData)"
+          @click="handleSubmitClick"
         >
           {{ submitButtonLabel }}
         </app-button>

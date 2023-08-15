@@ -7,6 +7,7 @@ const props = defineProps<{
   placeholder?: string;
   appendIcon?: string;
   label?: string;
+  error?: string;
 }>();
 
 const emit = defineEmits<{
@@ -43,5 +44,8 @@ const variantClassMapping = {
         size="medium"
       />
     </div>
+    <p v-if="error" class="text-sm text-red font-medium pt-1.5">
+      {{ error }}
+    </p>
   </div>
 </template>
