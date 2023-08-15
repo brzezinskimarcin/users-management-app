@@ -17,6 +17,7 @@ const initialData = ref<UserFormData>({
 
 async function handleSubmitClick(formData: UserFormData) {
   await usersStore.createUser(formData);
+  await usersStore.fetchUsers();
   router.back();
 }
 </script>

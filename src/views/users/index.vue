@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router/auto';
 import { useI18n } from 'vue-i18n';
 import type { User } from '@/types/api';
 import { useUsersStore } from '@/store/users';
+import defaultAvatar from '@/assets/avatar-placeholder.png';
 
 const usersStore = useUsersStore();
 const { t } = useI18n();
@@ -20,8 +21,9 @@ function handleRemoveClick(user: User) {
   showConfirmationDialog.value = true;
 }
 
-function handleConfirmRemoveClick() {
-  usersStore.deleteUser();
+async function handleConfirmRemoveClick() {
+  await usersStore.deleteUser();
+  await usersStore.fetchUsers();
   showConfirmationDialog.value = false;
 }
 </script>
@@ -67,7 +69,7 @@ function handleConfirmRemoveClick() {
         >
           <td class="py-3 px-3">
             <img
-              :src="user.avatar"
+              :src="user.avatar || defaultAvatar"
               alt="avatar"
               class="min-w-12 min-h-12 rounded-full object-cover"
             >

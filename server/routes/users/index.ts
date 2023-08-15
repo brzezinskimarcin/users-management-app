@@ -15,7 +15,7 @@ export default defineEventHandler((event) => {
 function getUsers(event: H3Event<EventHandlerRequest>) {
   const { page, query, per_page }: Record<string, string> = getQuery(event);
   const filtered = users
-    .filter(({ first_name, last_name }) => `${first_name} ${last_name}`.includes(query?.toString() || ''));
+    .filter(({ first_name, last_name }) => `${first_name} ${last_name}`.toLowerCase().includes(query?.toString()?.toLowerCase() || ''));
 
   return {
     total_pages: Math.ceil(filtered.length / +per_page),

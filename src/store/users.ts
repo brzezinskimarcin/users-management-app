@@ -11,7 +11,7 @@ export const useUsersStore = defineStore('users', () => {
     timeout: 500,
   });
   const modifiedUser = ref<User>();
-  const { data: response, loading } = useFetch<GetUsersResponse>({
+  const { execute: fetchUsers, data: response, loading } = useFetch<GetUsersResponse>({
     url: '/users',
     query: computed(() => ({
       per_page: 8,
@@ -36,5 +36,5 @@ export const useUsersStore = defineStore('users', () => {
     method: 'DELETE',
   });
 
-  return { page, query, response, loading, modifiedUser, createUser, editUser, deleteUser };
+  return { page, query, response, loading, modifiedUser, fetchUsers, createUser, editUser, deleteUser };
 });
