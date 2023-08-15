@@ -44,12 +44,14 @@ watch(() => usersStore.query, () => {
         :placeholder="t('search-for-users')"
         variant="filled"
         append-icon="i-material-symbols-search-rounded"
+        class="px-3 w-full sm:(px-0 w-auto)"
       />
       <app-button
         variant="filled"
         color="primary"
         size="big"
         rounded="full"
+        class="fixed bottom-3 right-3 sm:static z-1"
         @click="router.push('/users/add')"
       >
         <app-icon icon="i-material-symbols-add" size="big" />
@@ -118,7 +120,7 @@ watch(() => usersStore.query, () => {
     :total-pages="usersStore.response?.total_pages || 0"
     class="pt-5"
   />
-  <app-dialog v-model="showConfirmationDialog" :title="t('delete-user')" class="w-1/2">
+  <app-dialog v-model="showConfirmationDialog" :title="t('delete-user')" class="w-4/5 sm:w-1/2">
     <div class="text-center">
       <p class="pb-4">
         Are you sure you want to delete this user?

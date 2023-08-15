@@ -14,7 +14,7 @@ function handleButtonClick(page: number) {
 </script>
 
 <template>
-  <div class="flex items-stretch">
+  <div class="flex items-stretch justify-center pb-18 sm:(justify-start pb-6)">
     <app-button
       :disabled="currentPage === 1"
       variant="outlined"

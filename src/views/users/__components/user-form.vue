@@ -48,9 +48,9 @@ watch(showChangePhotoDialog, (showDialog) => {
 </script>
 
 <template>
-  <div class="flex gap-8">
-    <app-card class="basis-2/3 flex flex-col items-start">
-      <div class="flex gap-8 py-8 w-full grow">
+  <div class="flex flex-col-reverse gap-8 lg:flex-row">
+    <app-card class="px-4 basis-2/3 flex flex-col items-start sm:px-0">
+      <div class="flex flex-col gap-8 py-8 w-full grow sm:flex-row">
         <app-input
           v-model="formData.first_name"
           :label="t('first-name')"
@@ -87,7 +87,7 @@ watch(showChangePhotoDialog, (showDialog) => {
         </app-button>
       </div>
     </app-card>
-    <app-card class="basis-1/3 flex flex-col items-start">
+    <app-card class="px-4 basis-1/3 flex flex-col items-start sm:px-0">
       <div class="mx-auto pt-6 pb-8">
         <img :src="formData.avatar || defaultAvatar" class="rounded-full w-32 h-32">
       </div>
@@ -105,7 +105,7 @@ watch(showChangePhotoDialog, (showDialog) => {
         </p>
       </app-button>
     </app-card>
-    <app-dialog v-model="showChangePhotoDialog" :title="t('change-photo')" class="w-1/2">
+    <app-dialog v-model="showChangePhotoDialog" :title="t('change-photo')" class="w-4/5 sm:w-1/2">
       <app-input
         v-model="newAvatarUrl"
         :label="t('photo-url')"
