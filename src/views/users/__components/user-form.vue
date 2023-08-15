@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import type { UserFormData } from '@/types/api';
@@ -19,6 +19,13 @@ const { t } = useI18n();
 
 const showChangePhotoDialog = ref(false);
 const formData = ref(props.initialData);
+const newAvatarUrl = ref(props.initialData.avatar);
+
+watch(showChangePhotoDialog, (showDialog) => {
+  if (!showDialog) {
+    formData.value.avatar = newAvatarUrl.value;
+  }
+});
 </script>
 
 <template>
@@ -79,7 +86,7 @@ const formData = ref(props.initialData);
     </app-card>
     <app-dialog v-model="showChangePhotoDialog" :title="t('change-photo')" class="w-1/2">
       <app-input
-        v-model="formData.avatar"
+        v-model="newAvatarUrl"
         :label="t('photo-url')"
         variant="outlined"
       />
