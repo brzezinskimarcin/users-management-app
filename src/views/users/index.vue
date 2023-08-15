@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router/auto';
 import { useI18n } from 'vue-i18n';
 import type { User } from '@/types/api';
@@ -23,9 +23,17 @@ function handleRemoveClick(user: User) {
 
 async function handleConfirmRemoveClick() {
   await usersStore.deleteUser();
-  await usersStore.fetchUsers();
+  if (usersStore.response?.data?.length === 1) {
+    usersStore.page = 1;
+  } else {
+    await usersStore.fetchUsers();
+  }
   showConfirmationDialog.value = false;
 }
+
+watch(() => usersStore.query, () => {
+  usersStore.page = 1;
+}, { flush: 'sync' });
 </script>
 
 <template>
