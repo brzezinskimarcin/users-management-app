@@ -2,5 +2,7 @@
   "/": "Home",
   "/users": "User list",
   "/users/add": "Add user",
-  "/users/edit": "Edit user"
+  "/users/edit": "Edit user",
+  "full-name": "Full Name",
+  "action": "Action"
 }

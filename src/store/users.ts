@@ -5,7 +5,7 @@ import { type GetUsersResponse, useFetch } from '@/composables/fetch';
 export const useUsersStore = defineStore('users', () => {
   const page = ref(1);
   const query = ref('');
-  const { data, loading } = useFetch<GetUsersResponse>({
+  const { data: response, loading } = useFetch<GetUsersResponse>({
     url: '/users',
     query: computed(() => ({
       per_page: 8,
@@ -15,5 +15,5 @@ export const useUsersStore = defineStore('users', () => {
     refetch: true,
   });
 
-  return { page, query, data, loading };
+  return { page, query, response, loading };
 });
