@@ -1,5 +1,6 @@
 {
   "/": "Home",
   "/users": "User list",
-  "/users/add": "Add user"
+  "/users/add": "Add user",
+  "/users/edit": "Edit user"
 }
