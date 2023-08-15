@@ -3,14 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "dev": "run-p dev:*",
+    "dev:client": "vite",
+    "dev:backend": "nitropack dev",
     "lint": "eslint . --ext .vue,.ts, --ignore-path .gitignore --fix",
-    "lint:ci": "eslint . --ext .vue,.ts, --ignore-path .gitignore",
     "typecheck": "vue-tsc --noEmit",
     "test": "vitest",
-    "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "mock": "nitropack dev"
+    "lint:ci": "eslint . --ext .vue,.ts, --ignore-path .gitignore"
   },
   "dependencies": {
     "pinia": "^2.1.4",
@@ -30,6 +31,7 @@
     "h3": "^1.8.0",
     "jsdom": "^22.1.0",
     "nitropack": "^2.5.2",
+    "npm-run-all": "^4.1.5",
     "sass": "^1.65.1",
     "typescript": "~5.1.6",
     "unocss": "^0.55.0",
