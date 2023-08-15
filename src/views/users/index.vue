@@ -26,7 +26,7 @@ const router = useRouter();
       >
         <app-icon icon="i-material-symbols-add" size="big" />
         <p class="ml-2 font-medium">
-          Add User
+          {{ t('add-user') }}
         </p>
       </app-button>
     </header>

@@ -5,5 +5,11 @@
   "/users/edit": "Edit user",
   "full-name": "Full Name",
   "action": "Action",
-  "search-for-users": "Search for users..."
+  "search-for-users": "Search for users...",
+  "add-user": "Add User",
+  "first-name": "First Name",
+  "last-name": "Last Name",
+  "update-details": "Update Details",
+  "cancel": "Cancel",
+  "change-photo": "Change Photo"
 }
