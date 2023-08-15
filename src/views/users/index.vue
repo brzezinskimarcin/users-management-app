@@ -123,7 +123,7 @@ watch(() => usersStore.query, () => {
   <app-dialog v-model="showConfirmationDialog" :title="t('delete-user')" class="w-4/5 sm:w-1/2">
     <div class="text-center">
       <p class="pb-4">
-        Are you sure you want to delete this user?
+        {{ t('confirm-delete-message') }}
       </p>
       <div class="inline-flex gap-4">
         <app-button

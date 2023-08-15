@@ -14,6 +14,7 @@
   "change-photo": "Change Photo",
   "photo-url": "Photo URL",
   "delete-user": "Delete User",
+  "confirm-delete-message": "Are you sure you want to delete this user?",
   "yes": "Yes",
   "no": "No"
 }
