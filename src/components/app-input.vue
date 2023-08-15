@@ -35,7 +35,7 @@ const variantClassMapping = {
       <input
         v-model="inputModel"
         :placeholder="placeholder"
-        class="bg-transparent focus:outline-none"
+        class="bg-transparent focus:outline-none w-full"
       >
       <app-icon
         v-if="appendIcon"

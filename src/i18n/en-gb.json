@@ -11,5 +11,6 @@
   "last-name": "Last Name",
   "update-details": "Update Details",
   "cancel": "Cancel",
-  "change-photo": "Change Photo"
+  "change-photo": "Change Photo",
+  "photo-url": "Photo URL"
 }

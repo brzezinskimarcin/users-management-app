@@ -1,7 +1,8 @@
 import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
 import { useDebouncedRef } from '@/composables/debounced-ref';
-import { type GetUsersResponse, useFetch } from '@/composables/fetch';
+import { useFetch } from '@/composables/fetch';
+import type { CreateUserResponse, GetUsersResponse } from '@/types/api';
 
 export const useUsersStore = defineStore('users', () => {
   const page = ref(1);
@@ -19,5 +20,10 @@ export const useUsersStore = defineStore('users', () => {
     refetch: true,
   });
 
-  return { page, query, response, loading };
+  const { execute: createUser } = useFetch<CreateUserResponse>({
+    url: '/users',
+    method: 'POST',
+  });
+
+  return { page, query, response, loading, createUser };
 });

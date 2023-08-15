@@ -2,6 +2,7 @@ import { type MaybeRefOrGetter, isProxy, isRef, ref, toValue, watch } from 'vue'
 
 interface FetchOptions<T, U> {
   url: MaybeRefOrGetter<string>;
+  method?: 'DELETE' | 'GET' | 'PATCH' | 'POST';
   query?: MaybeRefOrGetter<Record<string, number | string>>;
   refetch?: boolean;
   mapResponse?: (res: T) => U;
@@ -20,12 +21,12 @@ export function serializeQueryParams(params: Record<string, number | string>) {
 }
 
 export function useFetch<T, U = T>(options: FetchOptions<T, U>) {
-  const { url, query = {}, refetch, mapResponse } = options;
+  const { url, query = {}, method = 'GET', refetch, mapResponse } = options;
   const loading = ref(false);
   const error = ref<Error>();
   const data = ref<U>();
 
-  async function execute() {
+  async function execute(requestBody?: unknown) {
     loading.value = true;
     error.value = undefined;
 
@@ -33,11 +34,16 @@ export function useFetch<T, U = T>(options: FetchOptions<T, U>) {
       const serializedQueryParams = serializeQueryParams(toValue(query));
       const response = await fetch(
         `${BASE_URL}${toValue(url)}${serializedQueryParams}`,
+        {
+          method: toValue(method),
+          body: JSON.stringify(requestBody),
+        },
       );
 
       if (response.ok) {
         const responseData = await response.json();
         data.value = mapResponse ? mapResponse(responseData) : responseData;
+        return data.value;
       } else {
         throw new Error(response.statusText);
       }

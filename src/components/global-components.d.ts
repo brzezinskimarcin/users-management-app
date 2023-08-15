@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppButton: typeof import('./app-button.vue')['default']
     AppCard: typeof import('./app-card.vue')['default']
+    AppDialog: typeof import('./app-dialog.vue')['default']
     AppIcon: typeof import('./app-icon.vue')['default']
     AppInput: typeof import('./app-input.vue')['default']
     AppPagination: typeof import('./app-pagination.vue')['default']

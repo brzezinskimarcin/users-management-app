@@ -11,4 +11,6 @@ export interface GetUsersResponse {
   data: User[];
 }
 
-export type UserForm = Omit<User, 'id'>;
+export type UserFormData = Omit<User, 'id'>;
+
+export type CreateUserResponse = Pick<User, 'id'>;

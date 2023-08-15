@@ -2,19 +2,22 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import type { UserForm } from '@/types/api';
+import type { UserFormData } from '@/types/api';
+
+const props = defineProps<{
+  initialData: UserFormData;
+  submitButtonLabel: string;
+}>();
+
+const emit = defineEmits<{
+  'submit': [value: UserFormData];
+}>();
 
 const router = useRouter();
 const { t } = useI18n();
-const form = ref<UserForm>({
-  first_name: '',
-  last_name: '',
-  avatar: '',
-});
 
-function handleSubmitClick() {
-  console.log(form.value);
-}
+const showChangePhotoDialog = ref(false);
+const formData = ref(props.initialData);
 </script>
 
 <template>
@@ -22,13 +25,13 @@ function handleSubmitClick() {
     <app-card class="basis-2/3 flex flex-col items-start">
       <div class="flex gap-8 py-8 w-full grow">
         <app-input
-          v-model="form.first_name"
+          v-model="formData.first_name"
           :label="t('first-name')"
           variant="outlined"
           class="w-full"
         />
         <app-input
-          v-model="form.last_name"
+          v-model="formData.last_name"
           :label="t('last-name')"
           variant="outlined"
           class="w-full"
@@ -40,16 +43,16 @@ function handleSubmitClick() {
           color="primary"
           size="medium"
           rounded="small"
-          @click="handleSubmitClick"
+          @click="emit('submit', formData)"
         >
-          {{ t('update-details') }}
+          {{ submitButtonLabel }}
         </app-button>
         <app-button
           variant="outlined"
           color="gray-700"
           size="medium"
           rounded="small"
-          @click="router.back()"
+          @click="router.back"
         >
           {{ t('cancel') }}
         </app-button>
@@ -63,6 +66,7 @@ function handleSubmitClick() {
         size="medium"
         rounded="small"
         class="w-full"
+        @click="showChangePhotoDialog = true"
       >
         <app-icon size="medium" icon="i-material-symbols-android-camera" />
         <p class="ml-2">
@@ -70,5 +74,12 @@ function handleSubmitClick() {
         </p>
       </app-button>
     </app-card>
+    <app-dialog v-model="showChangePhotoDialog" :title="t('change-photo')" class="w-1/2">
+      <app-input
+        v-model="formData.avatar"
+        :label="t('photo-url')"
+        variant="outlined"
+      />
+    </app-dialog>
   </div>
 </template>
