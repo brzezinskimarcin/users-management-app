@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useRouter } from 'vue-router/auto';
 import { useI18n } from 'vue-i18n';
 import type { User } from '@/types/api';
@@ -7,10 +8,21 @@ import { useUsersStore } from '@/store/users';
 const usersStore = useUsersStore();
 const { t } = useI18n();
 const router = useRouter();
+const showConfirmationDialog = ref(false);
 
 function handleEditClick(user: User) {
-  usersStore.editingUser = user;
+  usersStore.modifiedUser = user;
   router.push('/users/edit');
+}
+
+function handleRemoveClick(user: User) {
+  usersStore.modifiedUser = user;
+  showConfirmationDialog.value = true;
+}
+
+function handleConfirmRemoveClick() {
+  usersStore.deleteUser();
+  showConfirmationDialog.value = false;
 }
 </script>
 
@@ -79,6 +91,7 @@ function handleEditClick(user: User) {
               variant="icon"
               color="gray-500"
               size="small"
+              @click="handleRemoveClick(user)"
             >
               <app-icon
                 icon="i-material-symbols-delete-rounded"
@@ -95,4 +108,31 @@ function handleEditClick(user: User) {
     :total-pages="usersStore.response?.total_pages || 0"
     class="pt-5"
   />
+  <app-dialog v-model="showConfirmationDialog" :title="t('delete-user')" class="w-1/2">
+    <div class="text-center">
+      <p class="pb-4">
+        Are you sure you want to delete this user?
+      </p>
+      <div class="inline-flex gap-4">
+        <app-button
+          variant="filled"
+          color="primary"
+          size="medium"
+          rounded="small"
+          @click="handleConfirmRemoveClick"
+        >
+          {{ t('yes') }}
+        </app-button>
+        <app-button
+          variant="outlined"
+          color="gray-700"
+          size="medium"
+          rounded="small"
+          @click="showConfirmationDialog = false"
+        >
+          {{ t('no') }}
+        </app-button>
+      </div>
+    </div>
+  </app-dialog>
 </template>

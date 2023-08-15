@@ -13,7 +13,7 @@ const initialData = ref<UserFormData>({
   first_name: '',
   last_name: '',
   avatar: '',
-  ...usersStore.editingUser,
+  ...usersStore.modifiedUser,
 });
 
 async function handleSubmitClick(formData: UserFormData) {

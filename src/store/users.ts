@@ -10,7 +10,7 @@ export const useUsersStore = defineStore('users', () => {
     initialValue: '',
     timeout: 500,
   });
-  const editingUser = ref<User>();
+  const modifiedUser = ref<User>();
   const { data: response, loading } = useFetch<GetUsersResponse>({
     url: '/users',
     query: computed(() => ({
@@ -26,10 +26,15 @@ export const useUsersStore = defineStore('users', () => {
     method: 'POST',
   });
 
-  const { execute: editUser } = useFetch<CreateUserResponse>({
-    url: computed(() => `/users/${editingUser.value?.id}`),
+  const { execute: editUser } = useFetch({
+    url: computed(() => `/users/${modifiedUser.value?.id}`),
     method: 'PATCH',
   });
 
-  return { page, query, response, loading, editingUser, createUser, editUser };
+  const { execute: deleteUser } = useFetch({
+    url: computed(() => `/users/${modifiedUser.value?.id}`),
+    method: 'DELETE',
+  });
+
+  return { page, query, response, loading, modifiedUser, createUser, editUser, deleteUser };
 });

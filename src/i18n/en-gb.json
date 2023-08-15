@@ -12,5 +12,8 @@
   "update-details": "Update Details",
   "cancel": "Cancel",
   "change-photo": "Change Photo",
-  "photo-url": "Photo URL"
+  "photo-url": "Photo URL",
+  "delete-user": "Delete User",
+  "yes": "Yes",
+  "no": "No"
 }
