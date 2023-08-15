@@ -34,14 +34,22 @@ const { t } = useI18n();
           <td class="w-full text-gray-900 px-3">
             {{ user.first_name }} {{ user.last_name }}
           </td>
-          <td class="whitespace-nowrap px-3">
-            <app-button>
+          <td class="whitespace-nowrap pr-3">
+            <app-button
+              variant="icon"
+              color="gray-500"
+              size="small"
+            >
               <app-icon
                 icon="i-material-symbols-edit-rounded"
                 size="big"
               />
             </app-button>
-            <app-button class="ml-3">
+            <app-button
+              variant="icon"
+              color="gray-500"
+              size="small"
+            >
               <app-icon
                 icon="i-material-symbols-delete-rounded"
                 size="big"
@@ -52,4 +60,9 @@ const { t } = useI18n();
       </tbody>
     </table>
   </app-card>
+  <app-pagination
+    v-model:current-page="usersStore.page"
+    :total-pages="usersStore.response?.total_pages || 0"
+    class="pt-5"
+  />
 </template>
