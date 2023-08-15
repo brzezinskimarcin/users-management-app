@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import { useUsersStore } from '@/store/users';
+
+const usersStore = useUsersStore();
+</script>
+
 <template>
-  <p>User List</p>
+  <pre>
+    {{ usersStore.data }}
+  </pre>
 </template>
