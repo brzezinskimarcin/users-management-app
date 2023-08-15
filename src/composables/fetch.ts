@@ -8,7 +8,7 @@ interface FetchOptions<T, U> {
   mapResponse?: (res: T) => U;
 }
 
-const BASE_URL = 'https://reqres.in/api';
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export function serializeQueryParams(params: Record<string, number | string>) {
   return Object.entries(params).reduce((queryString, [key, value]) => {

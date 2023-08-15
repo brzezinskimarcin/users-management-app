@@ -6,7 +6,6 @@ export interface User {
 }
 
 export interface GetUsersResponse {
-  page: number;
   total_pages: number;
   data: User[];
 }

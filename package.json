@@ -9,7 +9,8 @@
     "test": "vitest",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "mock": "nitropack dev"
   },
   "dependencies": {
     "pinia": "^2.1.4",
@@ -26,7 +27,9 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/test-utils": "^2.4.1",
     "eslint": "^8.45.0",
+    "h3": "^1.8.0",
     "jsdom": "^22.1.0",
+    "nitropack": "^2.5.2",
     "sass": "^1.65.1",
     "typescript": "~5.1.6",
     "unocss": "^0.55.0",
