@@ -4,5 +4,6 @@
   "/users/add": "Add user",
   "/users/edit": "Edit user",
   "full-name": "Full Name",
-  "action": "Action"
+  "action": "Action",
+  "search-for-users": "Search for users..."
 }

@@ -1,13 +1,36 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router/auto';
 import { useI18n } from 'vue-i18n';
 import { useUsersStore } from '@/store/users';
 
 const usersStore = useUsersStore();
 const { t } = useI18n();
+const router = useRouter();
 </script>
 
 <template>
   <app-card>
+    <header class="flex justify-between items-center">
+      <app-input
+        v-model="usersStore.query"
+        :placeholder="t('search-for-users')"
+        variant="filled"
+        append-icon="i-material-symbols-search-rounded"
+      />
+      <app-button
+        variant="filled"
+        color="primary"
+        size="big"
+        rounded="full"
+        @click="router.push('/users/add')"
+      >
+        <app-icon icon="i-material-symbols-add" size="big" />
+        <p class="ml-2 font-medium">
+          Add User
+        </p>
+      </app-button>
+    </header>
+    <hr class="my-6 border-gray-200">
     <table>
       <thead class="h-14">
         <th class="px-3" />

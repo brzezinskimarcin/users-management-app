@@ -4,7 +4,8 @@ import { computed } from 'vue';
 const props = defineProps<{
   variant: 'filled' | 'icon' | 'outlined';
   color: 'gray-300' | 'gray-500' | 'primary';
-  size: 'small';
+  size: 'big' | 'small';
+  rounded?: 'full' | 'small';
 }>();
 
 const variantClassMapping = {
@@ -32,16 +33,24 @@ const colorClassMapping = computed(() => ({
 })[props.variant]);
 
 const sizeClassMapping = {
+  big: 'px-5 py-3',
   small: 'px-3 py-1.5',
+};
+
+const roundedClassMapping = {
+  full: 'rounded-full',
+  small: 'rounded-md',
 };
 </script>
 
 <template>
   <button
     :class="[
+      'inline-flex items-center',
       variantClassMapping[variant],
       colorClassMapping[color],
       sizeClassMapping[size],
+      rounded ? roundedClassMapping[rounded] : '',
     ]"
     type="button"
   >
