@@ -18,7 +18,7 @@ async function editUser(event: H3Event<EventHandlerRequest>) {
   const user = users.find(user => user.id === +id);
   if (user) {
     Object.entries(requestBody).forEach(([key, value]) => {
-      user[key] = value;
+      (user as any)[key] = value;
     });
   }
 

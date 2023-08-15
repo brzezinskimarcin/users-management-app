@@ -11,7 +11,7 @@ export const useUsersStore = defineStore('users', () => {
     timeout: 500,
   });
   const modifiedUser = ref<User>();
-  const { execute: fetchUsers, data: response, loading } = useFetch<GetUsersResponse>({
+  const { execute: fetchUsers, data: response, loading: loadingUsers } = useFetch<GetUsersResponse>({
     url: '/users',
     query: computed(() => ({
       per_page: 8,
@@ -21,20 +21,33 @@ export const useUsersStore = defineStore('users', () => {
     refetch: true,
   });
 
-  const { execute: createUser } = useFetch<CreateUserResponse>({
+  const { execute: createUser, loading: creatingUser } = useFetch<CreateUserResponse>({
     url: '/users',
     method: 'POST',
   });
 
-  const { execute: editUser } = useFetch({
+  const { execute: editUser, loading: editingUser } = useFetch({
     url: computed(() => `/users/${modifiedUser.value?.id}`),
     method: 'PATCH',
   });
 
-  const { execute: deleteUser } = useFetch({
+  const { execute: deleteUser, loading: deletingUser } = useFetch({
     url: computed(() => `/users/${modifiedUser.value?.id}`),
     method: 'DELETE',
   });
 
-  return { page, query, response, loading, modifiedUser, fetchUsers, createUser, editUser, deleteUser };
+  return {
+    page,
+    query,
+    response,
+    loadingUsers,
+    modifiedUser,
+    creatingUser,
+    editingUser,
+    deletingUser,
+    fetchUsers,
+    createUser,
+    editUser,
+    deleteUser,
+  };
 });

@@ -18,8 +18,8 @@ const initialData = ref<UserFormData>({
 
 async function handleSubmitClick(formData: UserFormData) {
   await usersStore.editUser(formData);
-  await usersStore.fetchUsers();
   router.back();
+  await usersStore.fetchUsers();
 }
 </script>
 
@@ -27,6 +27,7 @@ async function handleSubmitClick(formData: UserFormData) {
   <user-form
     :initial-data="initialData"
     :submit-button-label="t('update-details')"
+    :loading="usersStore.editingUser"
     @submit="handleSubmitClick"
   />
 </template>

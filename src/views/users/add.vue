@@ -17,8 +17,8 @@ const initialData = ref<UserFormData>({
 
 async function handleSubmitClick(formData: UserFormData) {
   await usersStore.createUser(formData);
-  await usersStore.fetchUsers();
   router.back();
+  await usersStore.fetchUsers();
 }
 </script>
 
@@ -26,6 +26,7 @@ async function handleSubmitClick(formData: UserFormData) {
   <user-form
     :initial-data="initialData"
     :submit-button-label="t('add-user')"
+    :loading="usersStore.creatingUser"
     @submit="handleSubmitClick"
   />
 </template>

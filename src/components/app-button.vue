@@ -6,6 +6,7 @@ const props = defineProps<{
   color: 'gray-300' | 'gray-500' | 'gray-700' | 'primary';
   size: 'big' | 'medium' | 'small';
   rounded?: 'full' | 'small';
+  loading?: boolean;
 }>();
 
 const variantClassMapping = {
@@ -56,8 +57,10 @@ const roundedClassMapping = {
       sizeClassMapping[size],
       rounded ? roundedClassMapping[rounded] : '',
     ]"
+    :disabled="loading"
     type="button"
   >
-    <slot />
+    <app-loader v-if="loading" color="white" size="small" />
+    <slot v-else />
   </button>
 </template>

@@ -9,6 +9,7 @@ import defaultAvatar from '@/assets/avatar-placeholder.png';
 const props = defineProps<{
   initialData: UserFormData;
   submitButtonLabel: string;
+  loading: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -68,10 +69,12 @@ watch(showChangePhotoDialog, (showDialog) => {
       </div>
       <div class="flex gap-4">
         <app-button
+          :loading="loading"
           variant="filled"
           color="primary"
           size="medium"
           rounded="small"
+          class="min-w-38"
           @click="handleSubmitClick"
         >
           {{ submitButtonLabel }}

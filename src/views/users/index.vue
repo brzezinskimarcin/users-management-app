@@ -23,12 +23,13 @@ function handleRemoveClick(user: User) {
 
 async function handleConfirmRemoveClick() {
   await usersStore.deleteUser();
+  showConfirmationDialog.value = false;
+
   if (usersStore.response?.data?.length === 1) {
     usersStore.page = 1;
   } else {
     await usersStore.fetchUsers();
   }
-  showConfirmationDialog.value = false;
 }
 
 watch(() => usersStore.query, () => {
@@ -61,7 +62,13 @@ watch(() => usersStore.query, () => {
       </app-button>
     </header>
     <hr class="my-6 border-gray-200">
-    <table>
+    <app-loader
+      v-if="usersStore.loadingUsers"
+      :label="t('loading-users')"
+      color="primary"
+      size="big"
+    />
+    <table v-else>
       <thead class="h-14">
         <th class="px-3" />
         <th class="px-3">
@@ -127,10 +134,12 @@ watch(() => usersStore.query, () => {
       </p>
       <div class="inline-flex gap-4">
         <app-button
+          :loading="usersStore.deletingUser"
           variant="filled"
           color="primary"
           size="medium"
           rounded="small"
+          class="min-w-18"
           @click="handleConfirmRemoveClick"
         >
           {{ t('yes') }}

@@ -12,6 +12,7 @@ declare module 'vue' {
     AppDialog: typeof import('./app-dialog.vue')['default']
     AppIcon: typeof import('./app-icon.vue')['default']
     AppInput: typeof import('./app-input.vue')['default']
+    AppLoader: typeof import('./app-loader.vue')['default']
     AppPagination: typeof import('./app-pagination.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
