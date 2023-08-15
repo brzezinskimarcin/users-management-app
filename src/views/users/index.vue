@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router/auto';
 import { useI18n } from 'vue-i18n';
+import type { User } from '@/types/api';
 import { useUsersStore } from '@/store/users';
 
 const usersStore = useUsersStore();
 const { t } = useI18n();
 const router = useRouter();
+
+function handleEditClick(user: User) {
+  usersStore.editingUser = user;
+  router.push('/users/edit');
+}
 </script>
 
 <template>
@@ -62,6 +68,7 @@ const router = useRouter();
               variant="icon"
               color="gray-500"
               size="small"
+              @click="handleEditClick(user)"
             >
               <app-icon
                 icon="i-material-symbols-edit-rounded"

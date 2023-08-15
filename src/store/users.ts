@@ -2,7 +2,7 @@ import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
 import { useDebouncedRef } from '@/composables/debounced-ref';
 import { useFetch } from '@/composables/fetch';
-import type { CreateUserResponse, GetUsersResponse } from '@/types/api';
+import type { CreateUserResponse, GetUsersResponse, User } from '@/types/api';
 
 export const useUsersStore = defineStore('users', () => {
   const page = ref(1);
@@ -10,6 +10,7 @@ export const useUsersStore = defineStore('users', () => {
     initialValue: '',
     timeout: 500,
   });
+  const editingUser = ref<User>();
   const { data: response, loading } = useFetch<GetUsersResponse>({
     url: '/users',
     query: computed(() => ({
@@ -25,5 +26,10 @@ export const useUsersStore = defineStore('users', () => {
     method: 'POST',
   });
 
-  return { page, query, response, loading, createUser };
+  const { execute: editUser } = useFetch<CreateUserResponse>({
+    url: computed(() => `/users/${editingUser.value?.id}`),
+    method: 'PATCH',
+  });
+
+  return { page, query, response, loading, editingUser, createUser, editUser };
 });

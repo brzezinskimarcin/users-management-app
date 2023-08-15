@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import type { UserFormData } from '@/types/api';
+import defaultAvatar from '@/assets/avatar-placeholder.png';
 
 const props = defineProps<{
   initialData: UserFormData;
@@ -59,7 +60,9 @@ const formData = ref(props.initialData);
       </div>
     </app-card>
     <app-card class="basis-1/3 flex flex-col items-start">
-      <img src="@/assets/avatar-placeholder.png" class="mx-auto pt-6 pb-8">
+      <div class="mx-auto pt-6 pb-8">
+        <img :src="formData.avatar || defaultAvatar" class="rounded-full w-32 h-32">
+      </div>
       <app-button
         variant="outlined"
         color="gray-700"
